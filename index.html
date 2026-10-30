@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Earth - 100% Pure Organic Ash</title>
+  
+  <!-- Tailwind CSS & FontAwesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Firebase Scripts -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/app.js"></script>
+
+  <style>
+    @keyframes burnProcess {
+      0% { background-color: #78350f; transform: scale(1); filter: brightness(1); }
+      50% { background-color: #1c1917; transform: scale(0.96); filter: brightness(1.4); }
+      100% { background-color: #d6d3d1; transform: scale(0.92); filter: grayscale(0.5); }
+    }
+    @keyframes siftAsh {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(5px); }
+      100% { transform: translateY(0px); }
+    }
+    @keyframes fallPlant {
+      0% { transform: translateY(-30px); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translateY(30px); opacity: 0.2; }
+    }
+    .anim-burn { animation: burnProcess 4s infinite alternate ease-in-out; }
+    .anim-sift { animation: siftAsh 2s infinite ease-in-out; }
+    .anim-fall { animation: fallPlant 3s infinite linear; }
+  </style>
+</head>
+<body class="bg-emerald-950 text-slate-100 font-sans min-h-screen flex flex-col">
+
+  <!-- Navigation Bar -->
+  <header class="bg-emerald-900 border-b border-emerald-800 sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap justify-between items-center gap-4">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="showSection('homeSection')">
+        <div class="w-10 h-10 bg-emerald-500 rounded-full flex items-center justify-center text-emerald-950 text-xl font-bold">
+          <i class="fa-solid fa-leaf"></i>
+        </div>
+        <div>
+          <h1 class="text-xl font-bold tracking-wide text-emerald-300">Green Earth</h1>
+          <p class="text-xs text-emerald-400">100% Pure Organic Ash</p>
+        </div>
+      </div>
+
+      <nav class="flex flex-wrap items-center gap-2 text-sm font-medium">
+        <button onclick="showSection('homeSection')" class="px-3 py-2 bg-emerald-800 hover:bg-emerald-700 rounded-lg text-white">
+          <i class="fa-solid fa-store mr-1"></i> Dukaan
+        </button>
+        <button onclick="showSection('userDashboardSection')" id="navUserBtn" class="px-3 py-2 bg-teal-700 hover:bg-teal-600 rounded-lg text-white">
+          <i class="fa-solid fa-user-circle mr-1"></i> User Dashboard & Royalty
+        </button>
+        <button onclick="showSection('orderHistorySection')" class="px-3 py-2 bg-sky-700 hover:bg-sky-600 rounded-lg text-white">
+          <i class="fa-solid fa-clock-rotate-left mr-1"></i> Tracking
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Notice Bar -->
+  <div class="bg-amber-500 text-amber-950 font-bold text-center text-xs py-2 px-4 shadow-inner">
+    <i class="fa-solid fa-triangle-exclamation mr-1"></i> Strict Notice: Cash on Delivery (COD) Available Nahi Hai! Sirf Online Payment Hogi. No Refund / No Cancellation.
+  </div>
+
+  <main class="flex-grow max-w-7xl w-full mx-auto p-4">
+
+    <!-- HOME / PRODUCTS SECTION -->
+    <section id="homeSection" class="space-y-8">
+      
+      <!-- ANIMATION BANNER: Wood -> Sift Ash -> Plant Growth -->
+      <div class="relative bg-gradient-to-br from-emerald-900 via-emerald-800 to-slate-900 border border-emerald-700 rounded-2xl p-6 md:p-8 shadow-2xl overflow-hidden">
+        <h2 class="text-center text-2xl font-extrabold text-amber-300 mb-6">🌿 Lakdi Se Paudhon Tak Ka Kudarati Safar</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center text-center">
+          <!-- Step 1: Wood Burning -->
+          <div class="bg-emerald-950/80 p-5 rounded-xl border border-emerald-700 flex flex-col items-center">
+            <div class="w-16 h-16 rounded-full anim-burn flex items-center justify-center text-2xl text-amber-200 shadow-md mb-3">
+              <i class="fa-solid fa-fire"></i>
+            </div>
+            <h3 class="font-bold text-amber-400">1. Lakdi Jalana & Raakh Banna</h3>
+            <p class="text-xs text-emerald-200 mt-1">Shuddh pedon ki lakdi ko surakshit tarike se jalakar raakh banai jati hai.</p>
+          </div>
+
+          <!-- Step 2: Sifted & Clean Ash -->
+          <div class="bg-emerald-950/80 p-5 rounded-xl border border-emerald-700 flex flex-col items-center">
+            <div class="w-16 h-16 bg-stone-400 rounded-full anim-sift flex items-center justify-center text-2xl text-stone-900 shadow-md mb-3">
+              <i class="fa-solid fa-filter"></i>
+            </div>
+            <h3 class="font-bold text-stone-200">2. Baarik Chhan-ni Se Safai</h3>
+            <p class="text-xs text-emerald-200 mt-1">Koyle ke bade tukde hata kar ekdum fine aur clean ash packet pack hoti hai.</p>
+          </div>
+
+          <!-- Step 3: Falling to Plants -->
+          <div class="bg-emerald-950/80 p-5 rounded-xl border border-emerald-700 flex flex-col items-center relative overflow-hidden">
+            <div class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-2xl text-emerald-100 shadow-md mb-3">
+              <i class="fa-solid fa-seedling anim-fall"></i>
+            </div>
+            <h3 class="font-bold text-green-300">3. Paudhon Mein Kudarati Khad</h3>
+            <p class="text-xs text-emerald-200 mt-1">Gamlon aur kheli mein dalte hi paudhe hara-bhare aur kitanu-mukt ho jate hain.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS GRID -->
+      <div>
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-xl font-bold text-emerald-300 border-l-4 border-emerald-500 pl-3">Pure Wood Ash Packs</h2>
+          <span class="text-xs bg-red-950 text-red-300 px-3 py-1 rounded-full border border-red-800">Online Prepaid Only (No COD)</span>
+        </div>
+        <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      </div>
+    </section>
+
+    <!-- USER DASHBOARD & 1M ROYALTY SECTION -->
+    <section id="userDashboardSection" class="hidden space-y-6">
+      <div id="dashboardContainer"></div>
+    </section>
+
+    <!-- ORDER TRACKING SECTION -->
+    <section id="orderHistorySection" class="hidden space-y-6">
+      <div id="orderHistoryContainer"></div>
+    </section>
+
+  </main>
+
+  <footer class="bg-emerald-950 border-t border-emerald-900 text-emerald-400 py-6 text-center text-xs mt-12">
+    <p>© 2026 Green Earth Organic Ash. All Rights Reserved. Direct Delivery via Speed Post.</p>
+  </footer>
+
+</body>
+</html>
